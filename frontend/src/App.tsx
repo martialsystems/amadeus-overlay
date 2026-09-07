@@ -4,48 +4,21 @@ import type { Live2DCharacterHandle } from "./components/Live2DCharacter";
 import ZzzLayer from "./components/ZzzLayer";
 import { sendInteraction } from "./api";
 import { startOverlayPointer } from "./overlayPointer";
-import { startSleepTimer } from "./sleepTimer";
+import { useKurisuSleep } from "./useKurisuSleep";
 import { interactions } from "./interactions";
 import type { InteractionName } from "./interactions";
 
 export default function App() {
   const [busy, setBusy] = useState(false);
-  const [sleeping, setSleeping] = useState(false);
   const characterRef = useRef<Live2DCharacterHandle>(null);
-  const sleepRef = useRef<ReturnType<typeof startSleepTimer> | null>(null);
-
-  function wake() {
-    setSleeping(false);
-    characterRef.current?.setSleeping(false);
-  }
-
-  function noteActivity() {
-    sleepRef.current?.poke();
-  }
-
-  useEffect(() => {
-    const timer = startSleepTimer({
-      onSleep() {
-        setSleeping(true);
-        characterRef.current?.setSleeping(true);
-      },
-      onWake() {
-        wake();
-      },
-    });
-    sleepRef.current = timer;
-    return () => {
-      timer.stop();
-      sleepRef.current = null;
-    };
-  }, []);
+  const { sleeping, noteActivity } = useKurisuSleep(characterRef);
 
   useEffect(() => {
     return startOverlayPointer({
       hitTest: (x, y) => characterRef.current?.hitTest(x, y) ?? false,
       onActivity: noteActivity,
     });
-  }, []);
+  }, [noteActivity]);
 
   async function handleInteraction(name: InteractionName) {
     if (busy) return;

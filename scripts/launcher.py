@@ -418,9 +418,9 @@ def run(no_browser: bool = False, no_ai: bool = False) -> None:
 
     print("\n========================================")
     if no_ai:
-        print(" Amadeus overlay is online (no OpenRouter, no GPT-SoVITS)")
+        print(" SG Overlay is online (no OpenRouter, no GPT-SoVITS)")
     else:
-        print(" Amadeus overlay is online")
+        print(" SG Overlay is online")
     print(" Click the figure. Drag to move. Right-click to quit.")
     print(f" Renderer: {url}")
     print(" Press Ctrl+C to shut everything down.")

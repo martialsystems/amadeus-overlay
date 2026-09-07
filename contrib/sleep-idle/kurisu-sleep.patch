@@ -1,0 +1,85 @@
+--- a/frontend/src/live2d/KurisuModel.ts
++++ b/frontend/src/live2d/KurisuModel.ts
+@@ -15,8 +15,11 @@
+   private released = false;
+   private ready = false;
+   private speaking = false;
++  private sleeping = false;
++  private sleepBlend = 0;
+   private lipSyncValue = 0;
+   private readonly mouthOpenId = CubismFramework.getIdManager().getId("ParamMouthOpenY");
++  private readonly eyeOpenId = CubismFramework.getIdManager().getId("ParamEyeROpen");
+ 
+   constructor(private readonly gl: WebGLRenderingContext) {
+     super();
+@@ -83,6 +86,10 @@
+     this.lipSyncValue = Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
+   }
+ 
++  setSleeping(sleeping: boolean): void {
++    this.sleeping = sleeping;
++  }
++
+   update(deltaSeconds: number): void {
+     if (!this.ready) return;
+     const model = this.getModel();
+@@ -94,6 +101,17 @@
+     if (this.speaking) {
+       model.setParameterValueById(this.mouthOpenId, this.lipSyncValue);
+     }
++    const sleepTarget = this.sleeping ? 1 : 0;
++    const sleepStep = deltaSeconds / 0.4;
++    if (this.sleepBlend < sleepTarget) {
++      this.sleepBlend = Math.min(sleepTarget, this.sleepBlend + sleepStep);
++    } else if (this.sleepBlend > sleepTarget) {
++      this.sleepBlend = Math.max(sleepTarget, this.sleepBlend - sleepStep);
++    }
++    if (this.sleepBlend > 0) {
++      const open = model.getParameterValueById(this.eyeOpenId);
++      model.setParameterValueById(this.eyeOpenId, open * (1 - this.sleepBlend));
++    }
+     model.update();
+   }
+ 
+@@ -114,6 +132,8 @@
+     this.released = true;
+     this.ready = false;
+     this.speaking = false;
++    this.sleeping = false;
++    this.sleepBlend = 0;
+     this.lipSyncValue = 0;
+     this.loading.abort();
+     this.motions.release();
+--- a/frontend/src/live2d/KurisuController.ts
++++ b/frontend/src/live2d/KurisuController.ts
+@@ -210,6 +210,10 @@
+     if (!this.destroyed) this.model?.setLipSyncValue(value);
+   }
+ 
++  setSleeping(sleeping: boolean): void {
++    if (!this.destroyed) this.model?.setSleeping(sleeping);
++  }
++
+   destroy(): void {
+     this.destroyed = true;
+ 
+--- a/frontend/src/components/Live2DCharacter.tsx
++++ b/frontend/src/components/Live2DCharacter.tsx
+@@ -12,6 +12,7 @@
+ 
+ export type Live2DCharacterHandle = {
+   playMotion: (group: string) => PlayMotionResult;
++  setSleeping: (sleeping: boolean) => void;
+   prepareSpeech: () => Promise<void>;
+   playSpeech: (url: string) => Promise<void>;
+   stopSpeech: () => void;
+@@ -29,6 +30,9 @@
+       playMotion(group: string) {
+         return controllerRef.current?.playMotion(group) ?? "not-ready";
+       },
++      setSleeping(sleeping: boolean) {
++        controllerRef.current?.setSleeping(sleeping);
++      },
+       async prepareSpeech() {
+         await speechPlayerRef.current?.prepare();
+       },

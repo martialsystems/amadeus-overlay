@@ -5,7 +5,7 @@ const RENDERER_URL = process.env.AMADEUS_RENDERER_URL || "http://127.0.0.1:5173/
 const WINDOW_WIDTH = 480;
 const WINDOW_HEIGHT = 640;
 
-app.setName("Amadeus");
+app.setName("SG Overlay");
 app.commandLine.appendSwitch("enable-transparent-visuals");
 
 function overlayBounds() {
@@ -54,7 +54,7 @@ function createOverlay() {
 
   win.webContents.on("context-menu", () => {
     Menu.buildFromTemplate([
-      { label: "Quit Amadeus", role: "quit" },
+      { label: "Quit SG Overlay", role: "quit" },
     ]).popup({ window: win });
   });
 
@@ -84,8 +84,8 @@ ipcMain.on("quit", () => app.quit());
 app.whenReady().then(() => {
   Menu.setApplicationMenu(Menu.buildFromTemplate([
     {
-      label: "Amadeus",
-      submenu: [{ role: "quit", label: "Quit Amadeus" }],
+      label: "SG Overlay",
+      submenu: [{ role: "quit", label: "Quit SG Overlay" }],
     },
   ]));
   createOverlay();
