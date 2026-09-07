@@ -22,7 +22,7 @@ set "EXIT_CODE=%errorlevel%"
 
 if not "%EXIT_CODE%"=="0" (
     echo.
-    echo SG Overlay launcher exited with an error.
+    echo Amadeus Overlay launcher exited with an error.
     echo Check .runtime\logs for service logs.
     pause
 )

@@ -230,14 +230,23 @@ def doSpecialInteraction():
     except ValueError:
         return jsonify({"message": "Unknown interaction"}), 400
 
+    voice = data.get("voice") if isinstance(data, dict) else "en"
+    if voice not in ("en", "ja"):
+        voice = "en"
+
     # chat.py stores reaction recordings relative to backend/. Convert those
     # internal paths into a browser-facing Flask endpoint.
     audio_url = reply.get("audio_url")
     prefix = "assets/reaction_audio/"
     if isinstance(audio_url, str) and audio_url.startswith(prefix):
+        name = audio_url[len(prefix):]
+        if voice == "ja":
+            ja_name = name if name.startswith("ja/") else f"ja/{name.split('/')[-1]}"
+            if (_reaction_audio_dir / ja_name).is_file():
+                name = ja_name
         reply = {
             **reply,
-            "audio_url": "/reaction_audio/" + audio_url[len(prefix):],
+            "audio_url": "/reaction_audio/" + name,
         }
 
     return jsonify({"status": "ok", **reply})

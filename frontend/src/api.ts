@@ -1,3 +1,5 @@
+export type VoiceId = "en" | "ja";
+
 export type MessageReply = {
   response: string;
   speechUrl?: string;
@@ -17,7 +19,10 @@ async function parseResponse(response: Response) {
   return data;
 }
 
-export async function sendInteraction(interactionValue: number): Promise<MessageReply> {
+export async function sendInteraction(
+  interactionValue: number,
+  voice: VoiceId = "en",
+): Promise<MessageReply> {
   const response = await fetch(`${API_BASE}/doSpecialInteraction`, {
     method: "POST",
     headers: {
@@ -25,6 +30,7 @@ export async function sendInteraction(interactionValue: number): Promise<Message
     },
     body: JSON.stringify({
       interaction_value: interactionValue,
+      voice,
     }),
   });
 

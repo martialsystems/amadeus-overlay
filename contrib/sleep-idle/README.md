@@ -21,7 +21,7 @@ Append `contrib/sleep-idle/zzz.css` to `frontend/src/styles.css`.
 From your Amadeus root:
 
 ```bash
-git apply path/to/sg-overlay/contrib/sleep-idle/kurisu-sleep.patch
+git apply path/to/amadeus-overlay/contrib/sleep-idle/kurisu-sleep.patch
 ```
 
 That adds `setSleeping` on `KurisuModel`, `KurisuController`, and `Live2DCharacter`. If `git apply` fails, paste those three hunks by hand. They only close `ParamEyeROpen`; they do not add overlay hit-testing.

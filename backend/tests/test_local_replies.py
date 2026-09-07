@@ -47,6 +47,20 @@ class LocalReplyTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         audio_url = response.json['audio_url']
         self.assertTrue(audio_url.startswith('/reaction_audio/kurisu_head_'))
+        self.assertNotIn('/ja/', audio_url)
+        audio = self.client.get(audio_url)
+        self.assertEqual(audio.status_code, 200)
+        self.assertTrue(audio.data.startswith(b'RIFF'))
+        self.assertGreater(len(audio.data), 1000)
+
+    def test_japanese_voice_serves_ja_wav(self):
+        response = self.client.post(
+            '/doSpecialInteraction',
+            json={'interaction_value': 2, 'voice': 'ja'},
+        )
+        self.assertEqual(response.status_code, 200)
+        audio_url = response.json['audio_url']
+        self.assertTrue(audio_url.startswith('/reaction_audio/ja/kurisu_head_'))
         audio = self.client.get(audio_url)
         self.assertEqual(audio.status_code, 200)
         self.assertTrue(audio.data.startswith(b'RIFF'))

@@ -1,20 +1,17 @@
 /** Add buttons here; motion names match groups in kurisu.model3.json. */
 export const interactions = {
-  special: 
-  {
+  special: {
     backendId: 1,
     motion: "TapReaction",
-    label: "Cat",
-    // Tight on the plush only. Mouth and hoodie stay out of this box.
-    position: { top: "72%", left: "50%", width: "26%", height: "14%" },
+    label: "Special touch",
+    position: { top: "45%", left: "50%", width: "30%", height: "10.5%" },
   },
 
-  head: 
-  {
+  head: {
     backendId: 2,
     motion: "PatReaction",
     label: "Head Pat",
-    position: { top: "24%", left: "50%", width: "22%", height: "8%" },
+    position: { top: "11%", left: "50%", width: "25%", height: "7.5%" },
   },
 };
 

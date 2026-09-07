@@ -1,19 +1,22 @@
-# sg-overlay
+# amadeus-overlay
 
-Amadeus sits on your desktop. Click her head or the cat. After a while she falls asleep.
+Kurisu sits on your desktop. Click her head or chest. She answers in English or Japanese.
 
 Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT
 
 ## Use it
 
-- Head: a small tilt
-- Cat: she gets mad, and a vein mark pops over her hair. No sound yet.
+- Head: a small tilt, and a spoken line
+- Chest: she gets mad, and a spoken line
+- Voice: right-click, or the Amadeus Overlay menu, then English or Japanese
 - Drag: move the window
-- 45 seconds with no click: eyes close, `zzz`s over her head
+- 45 seconds with no click: eyes close, `z`s over her head
 - Click again: she wakes
-- Right-click, or the SG Overlay menu, then Quit: close
+- Right-click, or the Amadeus Overlay menu, then Quit: close
 
 Clicks go through empty space around her, so you can still use the apps underneath.
+
+English lines are the cloned WAVs from `kurisu10s.wav`. Japanese lines are the original reaction recordings.
 
 ## Run it
 
@@ -22,8 +25,8 @@ You need Node, Python 3.12, and Git LFS.
 ### macOS
 
 ```bash
-git clone https://github.com/martialsystems/sg-overlay.git
-cd sg-overlay
+git clone https://github.com/martialsystems/amadeus-overlay.git
+cd amadeus-overlay
 git lfs install
 git lfs pull
 python3.12 -m venv backend/.venv
@@ -38,8 +41,8 @@ Same start later: `./start_local.command`
 ### Windows
 
 ```bat
-git clone https://github.com/martialsystems/sg-overlay.git
-cd sg-overlay
+git clone https://github.com/martialsystems/amadeus-overlay.git
+cd amadeus-overlay
 git lfs install
 git lfs pull
 py -3.12 -m venv backend\.venv
@@ -58,7 +61,7 @@ If you already run the original Amadeus chat app and only want the nap:
 
 1. Copy `frontend/src/sleepTimer.ts`, `frontend/src/useKurisuSleep.ts`, and `frontend/src/components/ZzzLayer.tsx` into the same places in your Amadeus folder.
 2. Paste `contrib/sleep-idle/zzz.css` at the bottom of `frontend/src/styles.css`.
-3. From your Amadeus folder run `git apply path/to/sg-overlay/contrib/sleep-idle/kurisu-sleep.patch`
+3. From your Amadeus folder run `git apply path/to/amadeus-overlay/contrib/sleep-idle/kurisu-sleep.patch`
 4. In `frontend/src/App.tsx`, import `ZzzLayer` and `useKurisuSleep`, call `useKurisuSleep(characterRef)`, run `noteActivity()` when the user clicks or sends a message, and render `{sleeping ? <ZzzLayer /> : null}` next to the character.
 
 Wait 45 seconds with no input: eyes close and `z`s rise. Click or send a message: she wakes. Chat stays as it was.
@@ -69,8 +72,8 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 | Path | Role |
 |------|------|
-| `frontend/` | Overlay window (Maho mesh, Kurisu Live2D still in the tree) |
-| `backend/` | Click audio |
+| `frontend/` | Overlay window (Kurisu Live2D) |
+| `backend/` | Click audio, English and Japanese |
 | `contrib/sleep-idle/` | Sleep add-on for original Amadeus |
 | `start_local.command` | Starts the overlay on a Mac |
 | `start_local.bat` | Starts the overlay on Windows |
@@ -79,7 +82,7 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 ## Changelog
 
-- Standalone sg-overlay (2026-09-07): own MIT repo. Sleep add-on under `contrib/sleep-idle/` for original Amadeus.
+- Amadeus Overlay (2026-09-07): Kurisu only. English or Japanese click voice. Repo name `amadeus-overlay`.
 - Idle sleep and English voice (2026-09-07): 45 second nap. Click lines in English from `kurisu10s.wav`.
 - Desktop overlay (2026-09-07): character on the desktop instead of a chat page.
 - Windows start (2026-09-07): `start_local.bat` runs the same overlay as the Mac command.

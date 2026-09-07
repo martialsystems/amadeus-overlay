@@ -1,4 +1,4 @@
-sg-overlay
+amadeus-overlay
 Copyright (c) 2026 Martial Systems LLC
 
 This tree started from reflectors02/Amadeus-Project. The original author
@@ -12,6 +12,5 @@ Third-party terms that stay in force:
 - Live2D character model, textures, and motions under frontend/public/live2d/:
   not granted by the MIT license.
 - Voice recordings under backend/assets/: not granted by the MIT license.
-- Maho stills under frontend/public/maho/: character art is not granted by the MIT license. Idle is the user-supplied hoodie still. Closed-eye and angry maps keep that still and only change the face, using official Steins;Gate 0 expression references.
 
 Original Amadeus: https://github.com/reflectors02/Amadeus-Project

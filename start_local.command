@@ -27,7 +27,7 @@ EXIT_CODE=$?
 
 if [[ $EXIT_CODE -ne 0 ]]; then
     echo
-    echo "SG Overlay launcher exited with an error."
+    echo "Amadeus Overlay launcher exited with an error."
     echo "Check .runtime/logs for service logs."
     read "?Press Enter to close..."
 fi

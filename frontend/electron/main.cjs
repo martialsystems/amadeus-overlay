@@ -1,12 +1,73 @@
 const { app, BrowserWindow, ipcMain, Menu, screen } = require("electron");
+const fs = require("fs");
 const path = require("path");
 
 const RENDERER_URL = process.env.AMADEUS_RENDERER_URL || "http://127.0.0.1:5173/";
 const WINDOW_WIDTH = 520;
 const WINDOW_HEIGHT = 720;
+const VOICES = ["en", "ja"];
+const VOICE_LABELS = { en: "English", ja: "Japanese" };
+const DEFAULT_VOICE = "en";
 
-app.setName("SG Overlay");
+app.setName("Amadeus Overlay");
 app.commandLine.appendSwitch("enable-transparent-visuals");
+
+let currentVoice = DEFAULT_VOICE;
+let overlayWindow = null;
+
+function voiceFile() {
+  return path.join(app.getPath("userData"), "overlay-voice.json");
+}
+
+function loadVoice() {
+  try {
+    const raw = JSON.parse(fs.readFileSync(voiceFile(), "utf8"));
+    if (raw && VOICES.includes(raw.id)) return raw.id;
+  } catch {
+    // first run
+  }
+  return DEFAULT_VOICE;
+}
+
+function saveVoice(id) {
+  try {
+    fs.writeFileSync(voiceFile(), `${JSON.stringify({ id })}\n`);
+  } catch {
+    // still applies this session
+  }
+}
+
+function setVoice(id) {
+  if (!VOICES.includes(id)) return;
+  currentVoice = id;
+  saveVoice(id);
+  if (overlayWindow && !overlayWindow.isDestroyed()) {
+    overlayWindow.webContents.send("voice-changed", id);
+    installMenus(overlayWindow);
+  }
+}
+
+function voiceMenuItems() {
+  return VOICES.map((id) => ({
+    label: VOICE_LABELS[id],
+    type: "radio",
+    checked: currentVoice === id,
+    click: () => setVoice(id),
+  }));
+}
+
+function installMenus(win) {
+  Menu.setApplicationMenu(Menu.buildFromTemplate([
+    {
+      label: "Amadeus Overlay",
+      submenu: [
+        { label: "Voice", submenu: voiceMenuItems() },
+        { type: "separator" },
+        { role: "quit", label: "Quit Amadeus Overlay" },
+      ],
+    },
+  ]));
+}
 
 function overlayBounds() {
   const { workArea } = screen.getPrimaryDisplay();
@@ -54,11 +115,15 @@ function createOverlay() {
 
   win.webContents.on("context-menu", () => {
     Menu.buildFromTemplate([
-      { label: "Quit SG Overlay", role: "quit" },
+      { label: "Voice", submenu: voiceMenuItems() },
+      { type: "separator" },
+      { label: "Quit Amadeus Overlay", role: "quit" },
     ]).popup({ window: win });
   });
 
+  installMenus(win);
   void win.loadURL(RENDERER_URL);
+  overlayWindow = win;
   return win;
 }
 
@@ -79,15 +144,12 @@ ipcMain.on("move-by", (event, dx, dy) => {
   );
 });
 
+ipcMain.handle("get-voice", () => currentVoice);
+ipcMain.on("set-voice", (_event, id) => setVoice(id));
 ipcMain.on("quit", () => app.quit());
 
 app.whenReady().then(() => {
-  Menu.setApplicationMenu(Menu.buildFromTemplate([
-    {
-      label: "SG Overlay",
-      submenu: [{ role: "quit", label: "Quit SG Overlay" }],
-    },
-  ]));
+  currentVoice = loadVoice();
   createOverlay();
 });
 
