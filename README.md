@@ -2,13 +2,13 @@
 
 Kurisu sits on your desktop. Click her and she talks. After a while she falls asleep.
 
-Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT/open source
+Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT
 
 ## Use it
 
 - Head or chest: she plays a line
 - Drag: move the window
-- 45 seconds with no click: eyes close, `z`s over her head
+- 45 seconds with no click: eyes close, `zzz`s over her head
 - Click again: she wakes
 - Right-click, or the SG Overlay menu, then Quit: close
 
