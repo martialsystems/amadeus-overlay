@@ -66,18 +66,7 @@ sg-overlay/
 
 ## Changelog
 
-## Standalone sg-overlay (2026-09-07)
-
-Published as its own MIT-licensed repo. Sleep idle is also a drop-in under `contrib/sleep-idle/` for original Amadeus trees.
-
-## Idle sleep and English cloned voice (2026-09-07)
-
-After 45 seconds without a click she sleeps. Click reactions use English WAVs cloned from `kurisu10s.wav`.
-
-## Desktop overlay, no chat (2026-09-07)
-
-Conversation UI replaced with a transparent always-on-top window.
-
-## Local no-AI launch (2026-09-07)
-
-Flask plus renderer start without Conda, OpenRouter, or GPT-SoVITS.
+- Standalone sg-overlay (2026-09-07): published as its own MIT repo. Sleep idle drop-in under `contrib/sleep-idle/` for original Amadeus trees.
+- Idle sleep and English cloned voice (2026-09-07): after 45 seconds without a click she sleeps. Click reactions use English WAVs cloned from `kurisu10s.wav`.
+- Desktop overlay, no chat (2026-09-07): conversation UI replaced with a transparent always-on-top window.
+- Local no-AI launch (2026-09-07): Flask plus renderer start without Conda, OpenRouter, or GPT-SoVITS.
