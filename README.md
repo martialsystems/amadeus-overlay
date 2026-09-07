@@ -2,7 +2,7 @@
 
 Kurisu sits on your desktop. Click her head or chest. She answers in English or Japanese.
 
-<video src="docs/demo.mp4" controls playsinline title="Amadeus Overlay demo"></video>
+https://github.com/user-attachments/assets/796cd394-dda2-4fa0-9cc7-15c19465914b
 
 Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT
 
@@ -83,6 +83,3 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 | `start_local.bat` | Starts the overlay on Windows |
 | [LICENSE](LICENSE) | MIT for our software |
 | [NOTICE](NOTICE) | Cubism, model, and voice terms |
-
-## Changelog
-

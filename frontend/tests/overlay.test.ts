@@ -53,7 +53,11 @@ assert.match(rootReadme, /English, Japanese, or Quit/);
 assert.match(rootReadme, /level-matched/);
 assert.match(rootReadme, /does not repeat/);
 assert.match(rootReadme, /docs\/demo\.mp4/);
-assert.match(rootReadme, /<video src="docs\/demo\.mp4"/);
+assert.match(
+  rootReadme,
+  /^https:\/\/github\.com\/user-attachments\/assets\/796cd394-dda2-4fa0-9cc7-15c19465914b$/m,
+);
+assert.doesNotMatch(rootReadme, /<video/);
 const demo = await readFile(new URL("../../docs/demo.mp4", import.meta.url));
 assert.ok(demo.byteLength > 100_000, String(demo.byteLength));
 const demoHead = Buffer.from(demo.subarray(0, 80));
