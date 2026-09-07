@@ -14,9 +14,11 @@ Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT/open
 
 Clicks go through empty space around her, so you can still use the apps underneath.
 
-## Run it (macOS)
+## Run it
 
 You need Node, Python 3.12, and Git LFS.
+
+### macOS
 
 ```bash
 git clone https://github.com/martialsystems/sg-overlay.git
@@ -31,6 +33,23 @@ chmod +x start_local.command
 ```
 
 Same start later: `./start_local.command`
+
+### Windows
+
+```bat
+git clone https://github.com/martialsystems/sg-overlay.git
+cd sg-overlay
+git lfs install
+git lfs pull
+py -3.12 -m venv backend\.venv
+backend\.venv\Scripts\python -m pip install -r backend\requirements-no-ai.txt
+cd frontend
+npm install
+cd ..
+start_local.bat
+```
+
+Same start later: double-click `start_local.bat` or `start_windows.bat`.
 
 ## Add sleep to original Amadeus
 
@@ -52,7 +71,8 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 | `frontend/` | Live2D window and Electron shell |
 | `backend/` | Click audio |
 | `contrib/sleep-idle/` | Sleep add-on for original Amadeus |
-| `start_local.command` | Starts the overlay |
+| `start_local.command` | Starts the overlay on a Mac |
+| `start_local.bat` | Starts the overlay on Windows |
 | [LICENSE](LICENSE) | MIT for our software |
 | [NOTICE](NOTICE) | Cubism, model, and voice terms |
 
@@ -61,4 +81,5 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 - Standalone sg-overlay (2026-09-07): own MIT repo. Sleep add-on under `contrib/sleep-idle/` for original Amadeus.
 - Idle sleep and English voice (2026-09-07): 45 second nap. Click lines in English from `kurisu10s.wav`.
 - Desktop overlay (2026-09-07): character on the desktop instead of a chat page.
+- Windows start (2026-09-07): `start_local.bat` runs the same overlay as the Mac command.
 - Local launch (2026-09-07): run with Python 3.12 and Node.

@@ -27,6 +27,12 @@ const rootReadme = await readFile(new URL("../../README.md", import.meta.url), "
 assert.match(rootReadme, /# sg-overlay/);
 assert.match(rootReadme, /Add sleep to original Amadeus/);
 assert.match(rootReadme, /kurisu-sleep\.patch/);
+assert.match(rootReadme, /start_local\.bat/);
+assert.match(rootReadme, /py -3\.12/);
+
+const winBat = await readFile(new URL("../../start_local.bat", import.meta.url), "utf8");
+assert.match(winBat, /launcher\.py" --no-ai/);
+assert.match(winBat, /backend\\\.venv\\Scripts\\python\.exe/);
 assert.doesNotMatch(rootReadme, /^Does /m);
 assert.doesNotMatch(rootReadme, /\u2014/);
 
