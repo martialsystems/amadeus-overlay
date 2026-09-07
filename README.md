@@ -1,12 +1,13 @@
 # sg-overlay
 
-Kurisu sits on your desktop. Click her and she talks. After a while she falls asleep.
+Maho sits on your desktop. Click her head or chest. After a while she falls asleep.
 
 Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT
 
 ## Use it
 
-- Head or chest: she plays a line
+- Head: a small tilt
+- Chest: she gets mad, and a vein mark pops over her hair. No sound yet.
 - Drag: move the window
 - 45 seconds with no click: eyes close, `zzz`s over her head
 - Click again: she wakes
@@ -68,7 +69,7 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 | Path | Role |
 |------|------|
-| `frontend/` | Live2D window and Electron shell |
+| `frontend/` | Overlay window (Maho mesh, Kurisu Live2D still in the tree) |
 | `backend/` | Click audio |
 | `contrib/sleep-idle/` | Sleep add-on for original Amadeus |
 | `start_local.command` | Starts the overlay on a Mac |
@@ -78,6 +79,7 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 ## Changelog
 
+- Maho overlay (2026-09-07): hoodie still as a full-res mesh. Chest click is mad + vein mark, no audio.
 - Standalone sg-overlay (2026-09-07): own MIT repo. Sleep add-on under `contrib/sleep-idle/` for original Amadeus.
 - Idle sleep and English voice (2026-09-07): 45 second nap. Click lines in English from `kurisu10s.wav`.
 - Desktop overlay (2026-09-07): character on the desktop instead of a chat page.

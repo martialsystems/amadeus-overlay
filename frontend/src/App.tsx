@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import Live2DCharacter from "./components/Live2DCharacter";
-import type { Live2DCharacterHandle } from "./components/Live2DCharacter";
+import MahoPuppet from "./components/MahoPuppet";
 import ZzzLayer from "./components/ZzzLayer";
+import { OVERLAY_CHARACTER } from "./character";
 import { sendInteraction } from "./api";
 import { startOverlayPointer } from "./overlayPointer";
 import { useKurisuSleep } from "./useKurisuSleep";
 import { interactions } from "./interactions";
+import type { OverlayCharacterHandle } from "./overlayCharacter";
 import type { InteractionName } from "./interactions";
 
 export default function App() {
   const [busy, setBusy] = useState(false);
-  const characterRef = useRef<Live2DCharacterHandle>(null);
+  const characterRef = useRef<OverlayCharacterHandle>(null);
   const { sleeping, noteActivity } = useKurisuSleep(characterRef);
 
   useEffect(() => {
@@ -27,6 +29,8 @@ export default function App() {
     const interaction = interactions[name];
     const result = characterRef.current?.playMotion(interaction.motion) ?? "not-ready";
     if (result !== "started") return;
+
+    if (OVERLAY_CHARACTER === "maho") return;
 
     const speechReady = characterRef.current?.prepareSpeech().then(
       () => true,
@@ -49,10 +53,14 @@ export default function App() {
   return (
     <main className="overlay">
       <div className="character-viewport">
-        <Live2DCharacter
-          ref={characterRef}
-          onSpeechError={(message) => console.error(message)}
-        />
+        {OVERLAY_CHARACTER === "maho" ? (
+          <MahoPuppet ref={characterRef} onBusyChange={setBusy} />
+        ) : (
+          <Live2DCharacter
+            ref={characterRef}
+            onSpeechError={(message) => console.error(message)}
+          />
+        )}
         {sleeping ? <ZzzLayer /> : null}
 
         {(Object.keys(interactions) as InteractionName[]).map((name) => {

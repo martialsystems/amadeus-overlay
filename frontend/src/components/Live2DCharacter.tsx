@@ -8,16 +8,9 @@ import {
 import { SpeechPlayer } from "../audio/SpeechPlayer";
 import { KurisuController } from "../live2d/KurisuController";
 
-import type { PlayMotionResult } from "../live2d/MotionPlayer";
+import type { OverlayCharacterHandle } from "../overlayCharacter";
 
-export type Live2DCharacterHandle = {
-  playMotion: (group: string) => PlayMotionResult;
-  hitTest: (clientX: number, clientY: number) => boolean;
-  setSleeping: (sleeping: boolean) => void;
-  prepareSpeech: () => Promise<void>;
-  playSpeech: (url: string) => Promise<void>;
-  stopSpeech: () => void;
-};
+export type Live2DCharacterHandle = OverlayCharacterHandle;
 
 const Live2DCharacter = forwardRef<Live2DCharacterHandle, { onSpeechError?: (message: string) => void }>(
   function Live2DCharacter({ onSpeechError }, ref) {
