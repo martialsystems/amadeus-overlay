@@ -56,6 +56,15 @@ function attachOverlayPointer(
     });
   }
 
+  function onContextMenu(event: MouseEvent) {
+    const overButton =
+      event.target instanceof Element &&
+      event.target.closest(".touch-button") !== null;
+    if (!overButton && !options.hitTest(event.clientX, event.clientY)) return;
+    event.preventDefault();
+    host.showMenu?.();
+  }
+
   function onDown(event: MouseEvent) {
     if (event.button !== 0) return;
     const overButton =
@@ -79,6 +88,7 @@ function attachOverlayPointer(
   window.addEventListener("mousemove", onMove);
   window.addEventListener("mousedown", onDown);
   window.addEventListener("mouseup", onUp);
+  window.addEventListener("contextmenu", onContextMenu);
   window.addEventListener("blur", onUp);
 
   return () => {
@@ -86,6 +96,7 @@ function attachOverlayPointer(
     window.removeEventListener("mousemove", onMove);
     window.removeEventListener("mousedown", onDown);
     window.removeEventListener("mouseup", onUp);
+    window.removeEventListener("contextmenu", onContextMenu);
     window.removeEventListener("blur", onUp);
     host.setClickThrough(true);
   };

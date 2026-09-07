@@ -47,24 +47,28 @@ function setVoice(id) {
   }
 }
 
-function voiceMenuItems() {
-  return VOICES.map((id) => ({
-    label: VOICE_LABELS[id],
-    type: "radio",
-    checked: currentVoice === id,
-    click: () => setVoice(id),
-  }));
+function overlayMenuTemplate() {
+  return [
+    ...VOICES.map((id) => ({
+      label: VOICE_LABELS[id],
+      type: "radio",
+      checked: currentVoice === id,
+      click: () => setVoice(id),
+    })),
+    { type: "separator" },
+    { label: "Quit Amadeus Overlay", role: "quit" },
+  ];
+}
+
+function popupOverlayMenu(win) {
+  Menu.buildFromTemplate(overlayMenuTemplate()).popup({ window: win });
 }
 
 function installMenus(win) {
   Menu.setApplicationMenu(Menu.buildFromTemplate([
     {
       label: "Amadeus Overlay",
-      submenu: [
-        { label: "Voice", submenu: voiceMenuItems() },
-        { type: "separator" },
-        { role: "quit", label: "Quit Amadeus Overlay" },
-      ],
+      submenu: overlayMenuTemplate(),
     },
   ]));
 }
@@ -114,11 +118,7 @@ function createOverlay() {
   win.on("closed", () => app.quit());
 
   win.webContents.on("context-menu", () => {
-    Menu.buildFromTemplate([
-      { label: "Voice", submenu: voiceMenuItems() },
-      { type: "separator" },
-      { label: "Quit Amadeus Overlay", role: "quit" },
-    ]).popup({ window: win });
+    popupOverlayMenu(win);
   });
 
   installMenus(win);
@@ -146,6 +146,10 @@ ipcMain.on("move-by", (event, dx, dy) => {
 
 ipcMain.handle("get-voice", () => currentVoice);
 ipcMain.on("set-voice", (_event, id) => setVoice(id));
+ipcMain.on("show-menu", (event) => {
+  const win = BrowserWindow.fromWebContents(event.sender);
+  if (win) popupOverlayMenu(win);
+});
 ipcMain.on("quit", () => app.quit());
 
 app.whenReady().then(() => {

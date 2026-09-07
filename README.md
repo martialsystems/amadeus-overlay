@@ -8,11 +8,12 @@ Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT
 
 - Head: a small tilt, and a spoken line
 - Chest: she gets mad, and a spoken line
-- Voice: right-click, or the Amadeus Overlay menu, then English or Japanese
 - Drag: move the window
 - 45 seconds with no click: eyes close, `z`s over her head
 - Click again: she wakes
-- Right-click, or the Amadeus Overlay menu, then Quit: close
+- Right-click her, or the Amadeus Overlay menu: English, Japanese, or Quit
+
+English is the starting voice. The last choice is kept the next time you start.
 
 Clicks go through empty space around her, so you can still use the apps underneath.
 
@@ -82,6 +83,7 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 ## Changelog
 
+- Right-click menu (2026-09-07): English, Japanese, and Quit on the figure and in the Amadeus Overlay menu.
 - Amadeus Overlay (2026-09-07): Kurisu only. English or Japanese click voice. Repo name `amadeus-overlay`.
 - Idle sleep and English voice (2026-09-07): 45 second nap. Click lines in English from `kurisu10s.wav`.
 - Desktop overlay (2026-09-07): character on the desktop instead of a chat page.

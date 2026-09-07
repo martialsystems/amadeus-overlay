@@ -18,6 +18,9 @@ contextBridge.exposeInMainWorld("overlay", {
     ipcRenderer.on("voice-changed", listener);
     return () => ipcRenderer.removeListener("voice-changed", listener);
   },
+  showMenu() {
+    ipcRenderer.send("show-menu");
+  },
   quit() {
     ipcRenderer.send("quit");
   },
