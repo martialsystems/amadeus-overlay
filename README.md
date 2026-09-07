@@ -2,7 +2,7 @@
 
 Kurisu sits on your desktop. Click her and she talks. After a while she falls asleep.
 
-This started as [Amadeus](https://github.com/reflectors02/Amadeus-Project). The original author said these edits are fine. The overlay lives in its own repo so more characters can be added later.
+Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT/open source
 
 ## Use it
 
