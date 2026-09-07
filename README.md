@@ -79,7 +79,6 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 ## Changelog
 
-- Maho overlay (2026-09-07): hoodie still as a full-res mesh. Chest click is mad + vein mark, no audio.
 - Standalone sg-overlay (2026-09-07): own MIT repo. Sleep add-on under `contrib/sleep-idle/` for original Amadeus.
 - Idle sleep and English voice (2026-09-07): 45 second nap. Click lines in English from `kurisu10s.wav`.
 - Desktop overlay (2026-09-07): character on the desktop instead of a chat page.
