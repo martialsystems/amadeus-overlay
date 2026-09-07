@@ -64,11 +64,11 @@ button {
 
 .anger-mark {
   position: absolute;
-  top: 14%;
-  left: 28%;
+  top: 28%;
+  left: 32%;
   z-index: 13;
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   pointer-events: none;
   opacity: 0;
   transform: scale(0.55) rotate(-14deg);
@@ -82,8 +82,8 @@ button {
 
 .zzz-layer {
   position: absolute;
-  top: 8%;
-  left: 62%;
+  top: 22%;
+  left: 58%;
   z-index: 12;
   width: 72px;
   height: 90px;

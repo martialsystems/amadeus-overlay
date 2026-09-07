@@ -14,6 +14,7 @@ assert.match(app, /MahoPuppet/);
 assert.match(await readFile(new URL("../src/interactions.ts", import.meta.url), "utf8"), /label: "Cat"/);
 assert.match(app, /ZzzLayer/);
 assert.match(css, /\.anger-mark/);
+assert.match(css, /top: 28%/);
 assert.match(app, /useKurisuSleep/);
 assert.match(timerSrc, /IDLE_SLEEP_MS = 45_000/);
 assert.match(css, /\.overlay\s*\{/);
