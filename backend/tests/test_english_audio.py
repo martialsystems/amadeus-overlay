@@ -30,6 +30,13 @@ class EnglishAudioTests(unittest.TestCase):
         }
         self.assertEqual(named, {path for path, _text in jobs})
 
+    def test_english_and_japanese_match_reference_level(self):
+        import sys
+        sys.path.insert(0, str(ROOT))
+        from scripts.equalize_reaction_audio import assert_matched
+
+        assert_matched()
+
 
 if __name__ == "__main__":
     unittest.main()

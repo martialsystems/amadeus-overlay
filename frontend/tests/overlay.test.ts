@@ -50,6 +50,7 @@ assert.match(rootReadme, /start_local\.bat/);
 assert.match(rootReadme, /py -3\.12/);
 assert.match(rootReadme, /martialsystems\/amadeus-overlay/);
 assert.match(rootReadme, /English, Japanese, or Quit/);
+assert.match(rootReadme, /level-matched/);
 assert.doesNotMatch(rootReadme, /sg-overlay/);
 assert.doesNotMatch(rootReadme, /Maho sits/);
 

@@ -92,6 +92,9 @@ def main() -> int:
     if args.check:
         return 0
     bake(jobs)
+    from scripts.equalize_reaction_audio import equalize
+
+    equalize()
     return 0
 
 
