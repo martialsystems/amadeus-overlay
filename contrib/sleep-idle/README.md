@@ -1,8 +1,8 @@
 # Sleep idle for original Amadeus
 
-Add 45-second idle sleep (closed eyes and `z`s off the head) to [reflectors02/Amadeus-Project](https://github.com/reflectors02/Amadeus-Project) without taking the overlay, Electron, or English voice work.
+These steps add the nap to [original Amadeus](https://github.com/reflectors02/Amadeus-Project): after 45 seconds she closes her eyes and `z`s float off her head.
 
-Tested against original `1545ff0`.
+Checked against original commit `1545ff0`. Chat stays. This is only the nap.
 
 ## Copy these files
 

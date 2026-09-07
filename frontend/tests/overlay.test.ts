@@ -23,6 +23,13 @@ assert.match(main, /WINDOW_WIDTH = 480/);
 assert.match(main, /WINDOW_HEIGHT = 640/);
 assert.match(main, /setIgnoreMouseEvents/);
 
+const rootReadme = await readFile(new URL("../../README.md", import.meta.url), "utf8");
+assert.match(rootReadme, /# sg-overlay/);
+assert.match(rootReadme, /Add sleep to original Amadeus/);
+assert.match(rootReadme, /kurisu-sleep\.patch/);
+assert.doesNotMatch(rootReadme, /^Does /m);
+assert.doesNotMatch(rootReadme, /\u2014/);
+
 const license = await readFile(new URL("../../LICENSE", import.meta.url), "utf8");
 const notice = await readFile(new URL("../../NOTICE", import.meta.url), "utf8");
 const sleepGuide = await readFile(new URL("../../contrib/sleep-idle/README.md", import.meta.url), "utf8");
