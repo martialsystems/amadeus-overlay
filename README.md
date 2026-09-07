@@ -86,12 +86,3 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 ## Changelog
 
-- Demo video (2026-09-07): `docs/demo.mp4` from the 6:40 AM screen recording.
-- English click lines (2026-09-07): a line does not repeat until the rest of that set has played.
-- Voice level (2026-09-07): English and Japanese click lines match the `kurisu10s.wav` reference volume.
-- Right-click menu (2026-09-07): English, Japanese, and Quit on the figure and in the Amadeus Overlay menu.
-- Amadeus Overlay (2026-09-07): Kurisu only. English or Japanese click voice. Repo name `amadeus-overlay`.
-- Idle sleep and English voice (2026-09-07): 45 second nap. Click lines in English from `kurisu10s.wav`.
-- Desktop overlay (2026-09-07): character on the desktop instead of a chat page.
-- Windows start (2026-09-07): `start_local.bat` runs the same overlay as the Mac command.
-- Local launch (2026-09-07): run with Python 3.12 and Node.
