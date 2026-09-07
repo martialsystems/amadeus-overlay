@@ -1,5 +1,7 @@
 # ---------- SPECIAL INTERACTIONS ---------- 
 
+import random
+
 INTERACTION_EVENTS = {
     1: "[Interaction event: The user touched your chest.]",
     2: "[Interaction event: The user patted your head.]",
@@ -41,5 +43,29 @@ INTERACTION_RESPONSES = {
     ],
 }
 
+_bags = {}
+_last = {}
 
+
+def reset_line_bags() -> None:
+    _bags.clear()
+    _last.clear()
+
+
+def pick_variant(interaction_value: int) -> dict:
+    """Draw a line without replacement so the same take cannot fire twice in a row."""
+    variants = INTERACTION_RESPONSES.get(interaction_value)
+    if not variants:
+        raise ValueError("Unknown interaction")
+    bag = _bags.get(interaction_value)
+    if not bag:
+        bag = list(variants)
+        random.shuffle(bag)
+        last = _last.get(interaction_value)
+        if last is not None and len(bag) > 1 and bag[-1] is last:
+            bag.insert(0, bag.pop())
+        _bags[interaction_value] = bag
+    variant = bag.pop()
+    _last[interaction_value] = variant
+    return variant
 

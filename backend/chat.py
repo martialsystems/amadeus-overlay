@@ -1,9 +1,8 @@
 import os
 import memory as store
 from pydantic import BaseModel, Field
-from chat_interactions import INTERACTION_EVENTS, INTERACTION_RESPONSES
+from chat_interactions import INTERACTION_EVENTS, pick_variant
 from local_replies import scripted_reply
-import random
 
 default_LLM_Model = store.DEFAULT_LLM_MODEL
 API_KEY = store.load_api_key()
@@ -201,11 +200,10 @@ def getOutputPacked(user_message: str) -> AmadeusPack:
 # - return the hard coded responses
 def SpecialInteraction(interaction_value: int) -> dict:
     event = INTERACTION_EVENTS.get(interaction_value)
-    response_variants = INTERACTION_RESPONSES.get(interaction_value)
-    if event is None or not response_variants:
+    if event is None:
         raise ValueError("Unknown interaction")
     # Select the text AND recording together, never independently.
-    variant = random.choice(response_variants)
+    variant = pick_variant(interaction_value)
     response = variant["text"]
     store.append_message("user", event)
     store.append_message("assistant", response);    

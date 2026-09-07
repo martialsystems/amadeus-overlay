@@ -51,6 +51,7 @@ assert.match(rootReadme, /py -3\.12/);
 assert.match(rootReadme, /martialsystems\/amadeus-overlay/);
 assert.match(rootReadme, /English, Japanese, or Quit/);
 assert.match(rootReadme, /level-matched/);
+assert.match(rootReadme, /does not repeat/);
 assert.doesNotMatch(rootReadme, /sg-overlay/);
 assert.doesNotMatch(rootReadme, /Maho sits/);
 

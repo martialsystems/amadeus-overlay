@@ -17,7 +17,7 @@ English is the starting voice. The last choice is kept the next time you start.
 
 Clicks go through empty space around her, so you can still use the apps underneath.
 
-English lines are the cloned WAVs from `kurisu10s.wav`. Japanese lines are the original reaction recordings. Both sets are level-matched to that reference clip.
+English lines are the cloned WAVs from `kurisu10s.wav`. Japanese lines are the original reaction recordings. Both sets are level-matched to that reference clip. English does not repeat a line until the rest of that click set has played.
 
 ## Run it
 
@@ -83,6 +83,7 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 ## Changelog
 
+- English click lines (2026-09-07): a line does not repeat until the rest of that set has played.
 - Voice level (2026-09-07): English and Japanese click lines match the `kurisu10s.wav` reference volume.
 - Right-click menu (2026-09-07): English, Japanese, and Quit on the figure and in the Amadeus Overlay menu.
 - Amadeus Overlay (2026-09-07): Kurisu only. English or Japanese click voice. Repo name `amadeus-overlay`.
