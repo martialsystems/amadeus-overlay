@@ -1,6 +1,6 @@
 # sg-overlay
 
-Maho sits on your desktop. Click her head or the cat. After a while she falls asleep.
+Amadeus sits on your desktop. Click her head or the cat. After a while she falls asleep.
 
 Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT
 
