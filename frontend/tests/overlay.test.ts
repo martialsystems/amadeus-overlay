@@ -11,6 +11,7 @@ assert.doesNotMatch(app, /Conversation/);
 assert.doesNotMatch(app, /sendMessage/);
 assert.match(app, /className="overlay"/);
 assert.match(app, /MahoPuppet/);
+assert.match(await readFile(new URL("../src/interactions.ts", import.meta.url), "utf8"), /label: "Cat"/);
 assert.match(app, /ZzzLayer/);
 assert.match(css, /\.anger-mark/);
 assert.match(app, /useKurisuSleep/);

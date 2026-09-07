@@ -18,7 +18,8 @@ export class MahoMotion {
   angerMark = false;
   sleeping = false;
   busy = false;
-  headRot = 0;
+  faceRot = 0;
+  hairSway = 0;
   torsoScaleY = 1;
   armSqueeze = 0;
   plushBob = 0;
@@ -67,15 +68,17 @@ export class MahoMotion {
       this.clip.elapsed += dt * 1000;
       const t = Math.min(1, this.clip.elapsed / this.clip.duration);
       if (this.clip.name === "PatReaction") {
-        this.headRot = Math.sin(t * Math.PI) * 0.12;
+        this.faceRot = Math.sin(t * Math.PI) * 0.16;
+        this.hairSway = Math.sin(t * Math.PI) * 0.02;
         this.armSqueeze = 1;
         this.texture = this.sleeping ? "eyes-closed" : "idle";
         this.angerMark = false;
         this.shakeX = 0;
       } else {
-        const shake = Math.sin(t * Math.PI * 8) * (1 - t) * 0.012;
+        const shake = Math.sin(t * Math.PI * 8) * (1 - t) * 0.008;
         this.shakeX = shake;
-        this.headRot = -0.04 + shake;
+        this.faceRot = -0.03;
+        this.hairSway = 0.01;
         this.texture = "angry";
         this.angerMark = true;
       }
@@ -83,7 +86,8 @@ export class MahoMotion {
         this.clip = null;
         this.busy = false;
         this.angerMark = false;
-        this.headRot = 0;
+        this.faceRot = 0;
+        this.hairSway = 0;
         this.shakeX = 0;
         this.texture = this.sleeping ? "eyes-closed" : "idle";
         this.onClipEnd?.();
@@ -91,7 +95,8 @@ export class MahoMotion {
       return;
     }
 
-    this.headRot = Math.sin(this.time * 0.7) * 0.03;
+    this.faceRot = Math.sin(this.time * 0.7) * 0.012;
+    this.hairSway = Math.sin(this.time * 0.45) * 0.01;
     this.shakeX = 0;
     this.angerMark = false;
 

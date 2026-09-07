@@ -20,7 +20,6 @@ varying vec2 v_uv;
 uniform sampler2D u_tex;
 void main() {
   vec4 color = texture2D(u_tex, v_uv);
-  if (color.a < 0.12) discard;
   gl_FragColor = color;
 }
 `;
@@ -48,7 +47,7 @@ function loadTexture(gl: WebGLRenderingContext, url: string): Promise<WebGLTextu
         return;
       }
       gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
@@ -135,15 +134,15 @@ export class MahoMeshPlayer {
     let scaleY = 1;
     if (canvasAspect > imageAspect) scaleX = imageAspect / canvasAspect;
     else scaleY = canvasAspect / imageAspect;
-    const zoom = 0.86;
+    const zoom = 0.72;
     scaleX *= zoom;
     scaleY *= zoom;
 
     gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.useProgram(this.program);
     gl.uniform2f(this.scaleLoc, scaleX, scaleY);
-    gl.uniform2f(this.offsetLoc, 0, 0.02);
+    gl.uniform2f(this.offsetLoc, 0, 0.05);
     gl.bindBuffer(gl.ARRAY_BUFFER, this.posBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, this.skinned, gl.DYNAMIC_DRAW);
     gl.enableVertexAttribArray(this.posLoc);

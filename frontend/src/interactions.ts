@@ -4,10 +4,9 @@ export const interactions = {
   {
     backendId: 1,
     motion: "TapReaction",
-    label: "Special touch",
-    // All four values use the shared 600 x 800 character design space.
-    // 15% x 7.5% corresponds to 90 x 60 design pixels.
-    position: { top: "48%", left: "50%", width: "32%", height: "12%" },
+    label: "Cat",
+    // Tight on the plush only. Mouth and hoodie stay out of this box.
+    position: { top: "72%", left: "50%", width: "26%", height: "14%" },
   },
 
   head: 
@@ -15,7 +14,7 @@ export const interactions = {
     backendId: 2,
     motion: "PatReaction",
     label: "Head Pat",
-    position: { top: "22%", left: "50%", width: "26%", height: "10%" },
+    position: { top: "24%", left: "50%", width: "22%", height: "8%" },
   },
 };
 

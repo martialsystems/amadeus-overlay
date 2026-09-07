@@ -22,8 +22,7 @@ assert.equal(spec.height, 1568);
 
 const mesh = buildGridMesh(spec);
 assert.deepEqual(mesh.groupNames, ["eyes", "face", "plush", "arms", "head", "body"]);
-const chin = mesh.groupNames[groupIndexAt(spec, 0.5, 0.47)];
-assert.ok(chin === "face" || chin === "head", chin);
+assert.equal(mesh.groupNames[groupIndexAt(spec, 0.5, 0.48)], "face");
 assert.equal(mesh.groupNames[groupIndexAt(spec, 0.5, 0.62)], "plush");
 
 function nearest(u: number, v: number): number {
@@ -41,18 +40,23 @@ function nearest(u: number, v: number): number {
   return best;
 }
 
-const chinI = nearest(0.5, 0.47);
+const chinI = nearest(0.5, 0.48);
 const plushI = nearest(0.5, 0.62);
 const bodyI = nearest(0.12, 0.7);
 const posed = new Float32Array(mesh.rest.length);
+const hairI = nearest(0.2, 0.12);
 skinVertices(spec, mesh, {
-  headRot: 0.25,
+  faceRot: 0.25,
+  hairSway: 0,
   torsoScaleY: 1.2,
   armSqueeze: 0,
   plushBob: 0,
   shakeX: 0,
 }, posed);
-assert.notEqual(posed[chinI * 2], mesh.rest[chinI * 2]);
+const chinMove = Math.abs(posed[chinI * 2] - mesh.rest[chinI * 2]);
+const hairMove = Math.abs(posed[hairI * 2] - mesh.rest[hairI * 2]);
+assert.ok(chinMove > 0.01, `chin should swing, got ${chinMove}`);
+assert.equal(hairMove, 0);
 assert.equal(posed[plushI * 2 + 1], mesh.rest[plushI * 2 + 1]);
 assert.notEqual(posed[bodyI * 2 + 1], mesh.rest[bodyI * 2 + 1]);
 assert.ok(mesh.indices.length > 0);
@@ -95,4 +99,9 @@ const character = await readFile(new URL("../src/character.ts", import.meta.url)
 assert.match(character, /"maho"/);
 
 const playerSrc = await readFile(new URL("../src/maho/meshPlayer.ts", import.meta.url), "utf8");
-assert.match(playerSrc, /const zoom = 0\.86/);
+assert.match(playerSrc, /const zoom = 0\.72/);
+assert.doesNotMatch(playerSrc, /discard/);
+
+const hits = await readFile(new URL("../src/interactions.ts", import.meta.url), "utf8");
+assert.match(hits, /top: "72%"/);
+assert.match(hits, /label: "Cat"/);

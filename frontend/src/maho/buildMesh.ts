@@ -82,7 +82,8 @@ export function buildGridMesh(spec: MeshSpec): SkinnedMesh {
 }
 
 export type BonePose = {
-  headRot: number;
+  faceRot: number;
+  hairSway: number;
   torsoScaleY: number;
   armSqueeze: number;
   plushBob: number;
@@ -107,12 +108,14 @@ export function skinVertices(
   pose: BonePose,
   out: Float32Array,
 ): void {
-  const headPivot = spec.bones.head.pivot;
+  const facePivot = spec.bones.face?.pivot ?? spec.bones.head.pivot;
+  const hairPivot = spec.bones.head.pivot;
   const torsoPivot = spec.bones.torso.pivot;
   const armPivot = spec.bones.arms.pivot;
-  const plushPivot = spec.bones.plush.pivot;
-  const cos = Math.cos(pose.headRot);
-  const sin = Math.sin(pose.headRot);
+  const faceCos = Math.cos(pose.faceRot);
+  const faceSin = Math.sin(pose.faceRot);
+  const hairCos = Math.cos(pose.hairSway);
+  const hairSin = Math.sin(pose.hairSway);
   const squeeze = 1 - pose.armSqueeze * 0.025;
 
   for (let i = 0; i < mesh.group.length; i++) {
@@ -120,8 +123,10 @@ export function skinVertices(
     let v = mesh.rest[i * 2 + 1];
     const name = mesh.groupNames[mesh.group[i]] ?? "body";
 
-    if (name === "head" || name === "face" || name === "eyes") {
-      [u, v] = applyRotate(u, v, headPivot, cos, sin);
+    if (name === "face" || name === "eyes") {
+      [u, v] = applyRotate(u, v, facePivot, faceCos, faceSin);
+    } else if (name === "head") {
+      [u, v] = applyRotate(u, v, hairPivot, hairCos, hairSin);
     } else if (name === "body") {
       v = torsoPivot[1] + (v - torsoPivot[1]) * pose.torsoScaleY;
     } else if (name === "plush") {

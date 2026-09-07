@@ -1,13 +1,13 @@
 # sg-overlay
 
-Maho sits on your desktop. Click her head or chest. After a while she falls asleep.
+Maho sits on your desktop. Click her head or the cat. After a while she falls asleep.
 
 Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT
 
 ## Use it
 
 - Head: a small tilt
-- Chest: she gets mad, and a vein mark pops over her hair. No sound yet.
+- Cat: she gets mad, and a vein mark pops over her hair. No sound yet.
 - Drag: move the window
 - 45 seconds with no click: eyes close, `zzz`s over her head
 - Click again: she wakes
