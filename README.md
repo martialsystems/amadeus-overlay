@@ -2,6 +2,8 @@
 
 Kurisu sits on your desktop. Click her head or chest. She answers in English or Japanese.
 
+<video src="docs/demo.mp4" controls playsinline title="Amadeus Overlay demo"></video>
+
 Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT
 
 ## Use it
@@ -73,6 +75,7 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 | Path | Role |
 |------|------|
+| `docs/demo.mp4` | Screen-recording demo |
 | `frontend/` | Overlay window (Kurisu Live2D) |
 | `backend/` | Click audio, English and Japanese |
 | `contrib/sleep-idle/` | Sleep add-on for original Amadeus |
@@ -83,6 +86,7 @@ Exact snippets: [contrib/sleep-idle/README.md](contrib/sleep-idle/README.md).
 
 ## Changelog
 
+- Demo video (2026-09-07): `docs/demo.mp4` from the 6:40 AM screen recording.
 - English click lines (2026-09-07): a line does not repeat until the rest of that set has played.
 - Voice level (2026-09-07): English and Japanese click lines match the `kurisu10s.wav` reference volume.
 - Right-click menu (2026-09-07): English, Japanese, and Quit on the figure and in the Amadeus Overlay menu.

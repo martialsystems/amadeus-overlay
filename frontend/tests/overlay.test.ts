@@ -52,6 +52,13 @@ assert.match(rootReadme, /martialsystems\/amadeus-overlay/);
 assert.match(rootReadme, /English, Japanese, or Quit/);
 assert.match(rootReadme, /level-matched/);
 assert.match(rootReadme, /does not repeat/);
+assert.match(rootReadme, /docs\/demo\.mp4/);
+assert.match(rootReadme, /<video src="docs\/demo\.mp4"/);
+const demo = await readFile(new URL("../../docs/demo.mp4", import.meta.url));
+assert.ok(demo.byteLength > 100_000, String(demo.byteLength));
+const demoHead = Buffer.from(demo.subarray(0, 80));
+assert.ok(demoHead.includes(Buffer.from("ftyp")));
+assert.doesNotMatch(demoHead.toString("latin1"), /git-lfs/);
 assert.doesNotMatch(rootReadme, /sg-overlay/);
 assert.doesNotMatch(rootReadme, /Maho sits/);
 
