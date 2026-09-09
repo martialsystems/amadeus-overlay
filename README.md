@@ -6,6 +6,8 @@
 
 Kurisu sits on your desktop. Click her head or chest. She answers in English or Japanese.
 
+Discord for suggestions: https://discord.gg/ZafFRsRt
+
 https://github.com/user-attachments/assets/796cd394-dda2-4fa0-9cc7-15c19465914b
 
 Forked from [Amadeus](https://github.com/reflectors02/Amadeus-Project). MIT
