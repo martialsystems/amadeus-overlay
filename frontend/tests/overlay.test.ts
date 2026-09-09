@@ -72,6 +72,8 @@ assert.match(winBat, /backend\\\.venv\\Scripts\\python\.exe/);
 assert.doesNotMatch(rootReadme, /^Does /m);
 assert.doesNotMatch(rootReadme, /\u2014/);
 assert.doesNotMatch(rootReadme, /What it is not/);
+assert.match(rootReadme, /ko-fi\.com\/martialgames/);
+assert.match(rootReadme, /Donate on Ko-fi/);
 
 const license = await readFile(new URL("../../LICENSE", import.meta.url), "utf8");
 const notice = await readFile(new URL("../../NOTICE", import.meta.url), "utf8");

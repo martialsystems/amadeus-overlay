@@ -1,5 +1,9 @@
 # amadeus-overlay
 
+<p align="right">
+  <a href="https://ko-fi.com/martialgames"><img src="https://img.shields.io/badge/Donate-Ko--fi-ff5e5b?style=flat-square&logo=ko-fi&logoColor=white" alt="Donate on Ko-fi" /></a>
+</p>
+
 Kurisu sits on your desktop. Click her head or chest. She answers in English or Japanese.
 
 https://github.com/user-attachments/assets/796cd394-dda2-4fa0-9cc7-15c19465914b
